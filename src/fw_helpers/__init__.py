@@ -23,12 +23,12 @@ def get_lpad():
     lpad = LaunchPad.auto_load()
     return lpad
 
-def get_wflow_output_by_id(wflow_id, store: JobStore | None = None):
+def get_wflow_output_by_id(wflow_id, store: JobStore = None):
     lpad = get_lpad()
     wflow = lpad.get_wf_by_fw_id(wflow_id)
     return get_wflow_output(wflow, store)
 
-def get_wflow_output(wflow, store: JobStore | None = None):
+def get_wflow_output(wflow, store: JobStore = None):
     if store is None:
         store = get_job_store()
 
