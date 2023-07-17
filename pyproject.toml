@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=42", "wheel", "setuptools-git-versioning"]
+build-backend = "setuptools.build_meta"
+
+[project]
+authors = [
+    { name = "Max Gallant", email = "maxg@lbl.gov" }
+]
+name = "fw_helpers"
+dependencies = [
+    "fireworks>=2.0.3",
+    "jobflow"
+]
+description = "A collection of helpers for interoperability of fireworks and jobflow"
+readme = "README.md"
+license = { text = "modified BSD" }
+dynamic = ["version"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Topic :: Scientific/Engineering :: Chemistry",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+requires-python = '>=3.8'
