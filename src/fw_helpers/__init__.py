@@ -1,4 +1,6 @@
 from fireworks.core.launchpad import LaunchPad
+from fireworks.core.firework import Firework
+
 from jobflow.settings import JobflowSettings
 from jobflow.core.store import JobStore
 
@@ -28,11 +30,28 @@ def get_wflow_output_by_id(wflow_id, store: JobStore = None):
     wflow = lpad.get_wf_by_fw_id(wflow_id)
     return get_wflow_output(wflow, store)
 
+def get_job_uuid_from_fw(fw: Firework):
+    return fw.tasks[0].get('job').uuid
+
+def get_job_output_from_fw(fw: Firework, store: JobStore = None):
+    if store is None:
+        store = get_job_store()
+
+    output = store.get_output(
+        get_job_uuid_from_fw(fw),
+        load=True
+    )
+
+    return load_output_from_dict(output)
+
 def get_wflow_output(wflow, store: JobStore = None):
     if store is None:
         store = get_job_store()
 
-    output = store.get_output(wflow.fws[-1].tasks[0].get('job').uuid, load=True)
+    output = store.get_output(
+        get_job_uuid_from_fw(wflow.fws[-1]),
+        load=True
+    )
     return load_output_from_dict(output)
 
 def load_output_from_dict(output_dict):
